@@ -56,7 +56,7 @@ class QrBallShapeRoundCorners extends QrBallShape with ShapeRoundCorners {
   int get hashCode => cornerFraction.hashCode;
 
 }
-class QrBallShapeRoundCornersBall extends QrBallShape with ShapeRoundCorners {
+class QrBallShapeRoundCornersBall extends QrBallShape with ShapeRoundCornersBall {
 
   @override
   final double cornerFraction;
@@ -66,7 +66,7 @@ class QrBallShapeRoundCornersBall extends QrBallShape with ShapeRoundCorners {
   final bool bottomLeft;
   final bool bottomRight;
 
-  const QrBallShapeRoundCornersBall(this.widthFraction, this.topLeft, this.topRight, this.bottomLeft, this.bottomRight, {required this.cornerFraction});
+  const QrBallShapeRoundCornersBall({required this.widthFraction, required this.topLeft, required this.topRight, required this.bottomLeft, required this.bottomRight, required this.cornerFraction});
 
   @override
   bool operator ==(Object other) =>
