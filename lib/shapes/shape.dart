@@ -37,6 +37,7 @@ mixin ShapeRoundCorners implements QrElementShape {
 
     abstract final double cornerFraction;
 
+
     @override
     Path createPath(Offset offset, double size, Neighbors neighbors) {
       Path path = Path();
@@ -79,4 +80,74 @@ mixin ShapeRoundCorners implements QrElementShape {
 
       return path;
     }
+}
+mixin ShapeRoundCornersBall implements QrElementShape {
+
+  abstract final double cornerFraction;
+abstract  final double widthFraction;
+abstract  final bool topLeft;
+abstract  final bool topRight;
+abstract  final bool bottomLeft;
+abstract  final bool bottomRight;
+
+  @override
+  Path createPath(Offset offset, double size, Neighbors neighbors) {
+    final cf = cornerFraction.coerceIn(0, 0.5);
+    final cTopLeft = topLeft ? cf : 0;
+    final cTopRight = topRight ? cf : 0;
+    final cBottomLeft = bottomLeft ? cf : 0;
+    final cBottomRight = bottomRight ? cf : 0;
+    final w = size / 7 * widthFraction.coerceIn(0, 2);
+
+    return Path()
+      ..fillType=PathFillType.nonZero
+      ..addRRect(
+        RRect.fromLTRBAndCorners(
+          offset.dx, offset.dy,
+          offset.dx + size, offset.dy + size,
+          topLeft: Radius.circular(size * cTopLeft),
+          topRight: Radius.circular(size * cTopRight),
+          bottomLeft: Radius.circular(size * cBottomLeft),
+          bottomRight: Radius.circular(size * cBottomRight),
+        ),
+      );
+  }
+}
+
+mixin SquareRotatedVertically implements QrElementShape {
+  @override
+  Path createPath(Offset offset, double size, Neighbors neighbors) {
+    return Path()
+      ..moveTo(size / 2, 0)
+      ..quadraticBezierTo(size / 2, 0, 0, size / 2)
+      ..quadraticBezierTo(size / 2, size, size / 2, size)
+      ..quadraticBezierTo(size / 2, size, size, size / 2)
+      ..quadraticBezierTo(size / 2, size / 2, size, size / 2)
+      ..close();
+  }
+}
+mixin TriangleVertically implements QrElementShape {
+  @override
+  Path createPath(Offset offset, double size, Neighbors neighbors) {
+    return Path()
+      ..moveTo(size / 2, 0)
+      ..quadraticBezierTo(size / 2, 0, 0, size / 2)
+      ..quadraticBezierTo(size / 2, size, size / 2, size)
+      ..quadraticBezierTo(size / 2, size, size, size / 2)
+      ..quadraticBezierTo(size / 2, size / 2, size, size / 2)
+      ..close();
+  }
+}
+mixin ShapeDarts implements QrElementShape {
+
+  abstract final double cornerFraction;
+
+  @override
+  Path createPath(Offset offset, double size, Neighbors neighbors) {
+    return Path() ..moveTo(size / 2, 0)
+      ..cubicTo(size * (0.5+offset.dx), size * (0.5+offset.dy), size * (0.5+offset.dy) , size * (0.5-offset.dx), size, size / 2)
+      ..cubicTo(size * (0.5+offset.dy), size * (0.5+offset.dx), size * (0.5+offset.dx) , size * (0.5+offset.dy), size / 2, size)
+      ..cubicTo(size * (0.5-offset.dx), size * (0.5+offset.dy), size * (0.5-offset.dy) , size * (0.5+offset.dx), 0, size / 2)
+      ..cubicTo(size * (0.5-offset.dy), size * (0.5-offset.dx), size * (0.5-offset.dx) , size * (0.5-offset.dy), size / 2, 0);
+  }
 }
