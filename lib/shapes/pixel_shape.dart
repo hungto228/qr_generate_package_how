@@ -61,3 +61,41 @@ class QrPixelShapeRoundCorners extends QrPixelShape with ShapeRoundCorners {
   @override
   int get hashCode => cornerFraction.hashCode;
 }
+class QrPixelBallSquareRotatedVertically extends QrPixelShape with SquareRotatedVertically {
+
+  const QrPixelBallSquareRotatedVertically();
+
+  @override
+  bool operator ==(Object other) => other is QrPixelBallSquareRotatedVertically;
+
+  @override
+  int get hashCode => 0;
+}
+class QrPixelBallTriangleVertically extends QrPixelShape with TriangleVertically {
+
+  const QrPixelBallTriangleVertically();
+
+  @override
+  bool operator ==(Object other) => other is QrPixelBallTriangleVertically;
+
+  @override
+  int get hashCode => 0;
+}
+
+class QrPixelBallShapeDarts extends QrPixelShape with ShapeDarts {
+
+  @override
+  final double cornerFraction;
+
+  const QrPixelBallShapeDarts({
+    this.cornerFraction = .5
+  });
+
+  @override
+  bool operator ==(Object other) =>
+      other is QrPixelShapeRoundCorners &&
+          other.cornerFraction == cornerFraction;
+
+  @override
+  int get hashCode => cornerFraction.hashCode;
+}
