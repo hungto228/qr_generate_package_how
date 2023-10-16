@@ -131,11 +131,11 @@ mixin TriangleVertically implements QrElementShape {
   Path createPath(Offset offset, double size, Neighbors neighbors) {
     return Path()
       ..moveTo(size / 2, 0)
-      ..quadraticBezierTo(size / 2, 0, 0, size / 2)
-      ..quadraticBezierTo(size / 2, size, size / 2, size)
-      ..quadraticBezierTo(size / 2, size, size, size / 2)
-      ..quadraticBezierTo(size / 2, size / 2, size, size / 2)
-      ..close();
+    ..quadraticBezierTo(size / 2,  0, 0, size )
+    ..quadraticBezierTo(size , size , size/2, size)
+    ..quadraticBezierTo(size , size, size, size )
+    ..quadraticBezierTo(size , size/ 2, size, size)
+    ..close();
   }
 }
 mixin ShapeDarts implements QrElementShape {
